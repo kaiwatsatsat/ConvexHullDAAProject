@@ -10,15 +10,14 @@ typedef struct point point;
 
 point* points;
 int numberOfPoints;
-/*********************************************************************************************************************************/
 
+/*****************************This segment of the program has all the sorting functions*******************************************/
 int comparator(const void *p, const void *q)
 {
 	int l=((struct point *)p)->x;
 	int r=((struct point *)q)->x;
 	return(int)(l-r);
 }
-
 point* sortPointsByXCoord(point* parr, int size)
 {
 	//printf("Inside sorter\n");
@@ -32,14 +31,12 @@ point* sortPointsByXCoord(point* parr, int size)
 	return temp;
 	//return 0;
 }
-
 int comparatory(const void *p, const void *q)
 {
 	int l=((struct point*)p)->y;
 	int r=((struct point*)q)->y;
 	return(int)(l-r);
 }
-
 point* sortPointsByYCoord(point* parr, int size)
 {
 	point *temp=(point*)malloc(sizeof(point)*size);
@@ -50,8 +47,8 @@ point* sortPointsByYCoord(point* parr, int size)
 	qsort((void*)temp,size,sizeof(point),comparatory);
 	return temp;
 } 
-
 /*********************************************************************************************************************************/
+
 void printPoints(point parr[], int size)
 {
 	printf("These are the points:\n");
