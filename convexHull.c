@@ -3,21 +3,26 @@
 #include<stdbool.h>
 struct point
 {
-	int x,y;
+	double x,y;
 	bool isInConvexHull;
 };
 typedef struct point point;
 
 point* points;
 int numberOfPoints;
+/*********************************************************************************************************************************/
 
-/*****************************This segment of the program has all the sorting functions*******************************************/
 int comparator(const void *p, const void *q)
 {
-	int l=((struct point *)p)->x;
-	int r=((struct point *)q)->x;
+	double l=((struct point *)p)->x;
+	double r=((struct point *)q)->x;
+	if((int)(l-r)==0)
+	{
+		return (int)((((struct point *)p)->y)-(((struct point *)q)->y));
+	}
 	return(int)(l-r);
 }
+
 point* sortPointsByXCoord(point* parr, int size)
 {
 	//printf("Inside sorter\n");
@@ -31,12 +36,18 @@ point* sortPointsByXCoord(point* parr, int size)
 	return temp;
 	//return 0;
 }
+
 int comparatory(const void *p, const void *q)
 {
-	int l=((struct point*)p)->y;
-	int r=((struct point*)q)->y;
+	double l=((struct point*)p)->y;
+	double r=((struct point*)q)->y;
+	if((int)(l-r)==0)
+	{
+		return (int)((((struct point *)p)->x)-(((struct point *)q)->x));
+	}
 	return(int)(l-r);
 }
+
 point* sortPointsByYCoord(point* parr, int size)
 {
 	point *temp=(point*)malloc(sizeof(point)*size);
@@ -47,15 +58,15 @@ point* sortPointsByYCoord(point* parr, int size)
 	qsort((void*)temp,size,sizeof(point),comparatory);
 	return temp;
 } 
-/*********************************************************************************************************************************/
 
+/*********************************************************************************************************************************/
 void printPoints(point parr[], int size)
 {
 	printf("These are the points:\n");
 	printf("X-coord\t\tY-coord\t\tIsInConvexHull?\n");
 	for(int i=0;i<size;i++)
 	{
-		printf("%d\t%d\t%d\n",parr[i].x,parr[i].y,parr[i].isInConvexHull);
+		printf("%lf\t%lf\t%d\n",parr[i].x,parr[i].y,parr[i].isInConvexHull);
 	}
 }
 /*********************************************************************************************************************************/
@@ -88,7 +99,7 @@ int main()
 	printf("Enter the x and y coordinates of the points now:\n");
 	for(int i=0;i<numberOfPoints;i++)
 	{
-		scanf("%d%d",&points[i].x,&points[i].y);
+		scanf("%lf%lf",&points[i].x,&points[i].y);
 		points[i].isInConvexHull=false;
 	}
 	printPoints(points,numberOfPoints);
@@ -99,3 +110,4 @@ int main()
 	printf("\n\n");
 	printPoints(bb,numberOfPoints);
 }
+
